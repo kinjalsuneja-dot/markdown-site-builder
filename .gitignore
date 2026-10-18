@@ -1,0 +1,45 @@
+
+# Secrets and environment variables
+.env
+.env.*
+!.env.example
+secrets/
+credentials/
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+out/
+
+# Editor settings
+.vscode/
+.idea/
+
+# Logs and temporary files
+*.log
+logs/
+*.tmp
+*.temp
+*.bak
+
+# Test output and caches
+coverage/
+.nyc_output/
+.cache/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Local database files
+*.sqlite
+*.sqlite3
+*.db

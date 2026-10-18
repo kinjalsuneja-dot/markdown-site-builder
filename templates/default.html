@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{title}}</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f6fb;
+      color: #263247;
+      line-height: 1.7;
+    }
+
+    header {
+      background: #172554;
+      color: white;
+      padding: 18px 8%;
+      font-weight: bold;
+    }
+
+    main {
+      max-width: 850px;
+      margin: 45px auto;
+      padding: 35px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 18px #0000000d;
+    }
+
+    h1, h2, h3 {
+      color: #172554;
+      line-height: 1.3;
+    }
+
+    a {
+      color: #2563eb;
+    }
+
+    pre {
+      padding: 16px;
+      overflow-x: auto;
+      background: #eef2ff;
+      border-radius: 8px;
+    }
+
+    code {
+      background: #eef2ff;
+      padding: 2px 5px;
+      border-radius: 4px;
+    }
+
+    pre code {
+      padding: 0;
+    }
+
+    .meta {
+      color: #64748b;
+      font-size: 14px;
+      margin-bottom: 25px;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #e0e7ff;
+      color: #3730a3;
+      padding: 3px 10px;
+      margin: 4px 4px 4px 0;
+      border-radius: 20px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #64748b;
+      font-size: 13px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>Markdown Site Builder</header>
+
+  <main>
+    <h1>{{title}}</h1>
+
+    <div class="meta">
+      <div>Published: {{date}}</div>
+      <div>{{tags}}</div>
+    </div>
+
+    <article>
+      {{content}}
+    </article>
+  </main>
+
+  <footer>Generated with Markdown Site Builder</footer>
+</body>
+</html>
