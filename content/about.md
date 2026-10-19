@@ -1,4 +1,3 @@
-
 ---
 title: "About This Site"
 date: "2026-10-18"

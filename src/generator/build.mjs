@@ -62,7 +62,7 @@ async function buildSite() {
   for (const filePath of markdownFiles) {
     const source = await readFile(filePath, "utf8");
     const { data, content } = matter(source);
-
+    
     const title =
       data.title ||
       path.basename(filePath, path.extname(filePath));
@@ -77,7 +77,7 @@ async function buildSite() {
     const tags = Array.isArray(rawTags)
       ? rawTags
       : String(rawTags).split(",");
-
+      
     const tagsHtml = tags
       .map(tag => String(tag).trim())
       .filter(Boolean)
@@ -101,7 +101,7 @@ async function buildSite() {
     }
 
     const relativePath = path.relative(contentDir, filePath);
-    const postUrl = relativePath.replace (/\/md$/i, ".html")
+    const postUrl = relativePath.replace(/\.md$/i, ".html");
 
     posts.push({
       title: String(title),
