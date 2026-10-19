@@ -57,6 +57,8 @@ async function buildSite() {
 
   await mkdir(outputDir, { recursive: true });
 
+  const posts = [];
+
   for (const filePath of markdownFiles) {
     const source = await readFile(filePath, "utf8");
     const { data, content } = matter(source);
@@ -99,6 +101,14 @@ async function buildSite() {
     }
 
     const relativePath = path.relative(contentDir, filePath);
+    const postUrl = relativePath.replace (/\/md$/i, ".html")
+
+    posts.push({
+      title: String(title),
+      url: postUrl,
+      tags: tags.map(tag => String(tag).trim()).filter(Boolean)
+    });
+
     const outputPath = path.join(
       outputDir,
       relativePath.replace(/\.md$/i, ".html")
@@ -111,6 +121,55 @@ async function buildSite() {
       `Generated: ${path.relative(projectRoot, outputPath)}`
     );
   }
+
+  const tagsMap = new Map();
+
+  for (const post of posts) {
+    for (const tag of post.tags) {
+      const normalizedTag = tag.toLowerCase();
+
+      if (!tagsMap.has(normalizedTag)) {
+        tagsMap.set(normalizedTag, {
+          name: tag,
+          posts: []
+        });
+      }
+      tagsMap.get(normalizedTag).posts.push(post);
+    }
+  }
+
+  const tagSections = [...tagsMap.values()]
+    .sort((a, b) => a.name.localeCompare(b.name))
+    .map(group => {
+      const links = group.posts
+        .map(post =>
+          `<li><a href="${escapeHtml(post.url)}">${escapeHtml(post.title)}</a></li>`
+        )
+        .join("\n");
+
+        return `<section>
+          <h2>${escapeHtml(group.name)}</h2>
+          <ul>${links}</ul>
+        </section>`;
+    })
+    .join("\n");
+
+    const tagsPage = `<!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Tags</title>
+    </head>
+    <body>
+      <h1>Browse by Tag</h1>
+      ${tagSections || "<p>No tags found.</p>"}
+    </body>
+    </html>`;
+
+    await writeFile(path.join(outputDir, "tags.html"), tagsPage, "utf8");
+
+    console.log("Generated: dist/tags.html");
 
   console.log(`\nBuild successful! Generated ${markdownFiles.length} page(s).`);
 }

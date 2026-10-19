@@ -1,19 +1,26 @@
-date: 2026-10-14
+
+---
+title: "My First Blog Post"
+date: "2026-10-17"
 tags:
+  - learning
   - web-development
-  - buildlab
 ---
 
-# Welcome to My Website
+# Welcome to My Blog
 
-This website is generated using our **Markdown Site Builder**.
+This is my first post generated using my static site builder.
 
-## Features
+## What I Am Learning
 
-- Markdown to HTML conversion
-- Page metadata using front matter
-- Reusable HTML templates
+- JavaScript and Node.js
+- Markdown parsing with `marked`
+- Front matter using `gray-matter`
 
-## About This Project
+You can write **bold text**, *italic text*, and [links](https://example.com).
 
-Our goal is to make creating static websites simple using Markdown.
+## Code Example
+
+```javascript
+console.log("Hello from my static site generator!");
+```
